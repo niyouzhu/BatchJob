@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace EricNee.BatchJob.Scheduler
+namespace EricNee.BatchJob.Core
 {
     public class SchedulerConfigurationSection : System.Configuration.ConfigurationSection
     {

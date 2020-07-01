@@ -84,7 +84,7 @@ namespace EricNee.BatchJob.Scheduler
             return Task.Factory.ContinueWhenAny(new Task[] { planTask, workTask }, task =>
  {
      if (task.IsFaulted)
-         throw task.Exception;
+         throw task.Exception.Flatten();
  });
         }
 
@@ -99,27 +99,24 @@ namespace EricNee.BatchJob.Scheduler
             public DateTime NextTime { get; set; }
 
             private bool _executed;
-            private object _lock = new object();
+            public object Lock { get; } = new object();
             public bool Executed
             {
                 get
                 {
-                    lock (_lock)
-                    {
-                        return _executed;
 
-                    }
+                    return _executed;
+
 
                 }
                 set
                 {
-                    lock (_lock)
-                    {
-                        _executed = value;
+                    _executed = value;
 
-                    }
                 }
             }
+
+            public DateTime LastRunTime { get; set; }
         }
 
         private class StopClass
@@ -136,12 +133,20 @@ namespace EricNee.BatchJob.Scheduler
                 var now = DateTime.Now;
                 foreach (var item in Plan)
                 {
-                    if (item.Executed)
+                    lock (item.Lock)
                     {
-                        var cron = CrontabSchedule.Parse(item.Job.Cron, new CrontabSchedule.ParseOptions() { IncludingSeconds = true });
-                        item.Executed = false;
-                        item.NextTime = cron.GetNextOccurrence(now);
+                        if (item.Executed)
+                        {
+                            var cron = CrontabSchedule.Parse(item.Job.Cron, new CrontabSchedule.ParseOptions() { IncludingSeconds = true });
+                            var nextTime = cron.GetNextOccurrence(now);
+                            if (nextTime - item.LastRunTime >= TimeSpan.FromSeconds(1)) //avoid the status being refreshed immediately as the Plan is quickly executed.
+                            {
+                                item.NextTime = nextTime;
+                                item.Executed = false;
+                            }
+                        }
                     }
+
                 }
                 Waitor.SpinOnce();
             }
@@ -156,15 +161,20 @@ namespace EricNee.BatchJob.Scheduler
                 {
                     try
                     {
-                        if (plan.NextTime <= now && plan.Executed == false)
+                        lock (plan.Lock)
                         {
-                            plan.Executed = true;
-                            var startInfo = new ProcessStartInfo(Section.ExecutorPath, plan.Job.JobId);
-                            startInfo.CreateNoWindow = true;
-                            startInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                            startInfo.UseShellExecute = true;
-                            var process = Process.Start(startInfo);
+                            if (plan.NextTime <= now && plan.Executed == false)
+                            {
+                                plan.Executed = true;
+                                var startInfo = new ProcessStartInfo(Section.ExecutorPath, plan.Job.JobId);
+                                startInfo.CreateNoWindow = true;
+                                startInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                                startInfo.UseShellExecute = true;
+                                var process = Process.Start(startInfo);
+                                plan.LastRunTime = DateTime.Now;
+                            }
                         }
+
 
                     }
                     catch (Exception ex)

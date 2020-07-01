@@ -5,7 +5,7 @@
 #xcopy NCrontab.dll C:\SVN\ItemMasterCreation\branches\Reconstruction\SSAB.APP\Refs /Y /R
 
 copy EricNee.BatchJob.Executor.exe C:\SVN\ItemMasterCreation\branches\Reconstruction\SSAB.APP\Refs\Executor.exe
-copy EricNee.BatchJob.Core.dll C:\SVN\ItemMasterCreation\branches\Reconstruction\SSAB.APP\Refs\BatchJob.Core.dll
+copy EricNee.BatchJob.Core.dll C:\SVN\ItemMasterCreation\branches\Reconstruction\SSAB.APP\Refs
 copy EricNee.BatchJob.Scheduler.exe C:\SVN\ItemMasterCreation\branches\Reconstruction\SSAB.APP\Refs\Scheduler.exe
-copy EricNee.BatchJob.TestJob.dll C:\SVN\ItemMasterCreation\branches\Reconstruction\SSAB.APP\Refs\TestJob.dll
+copy EricNee.BatchJob.TestJob.dll C:\SVN\ItemMasterCreation\branches\Reconstruction\SSAB.APP\Refs\
 copy NCrontab.dll C:\SVN\ItemMasterCreation\branches\Reconstruction\SSAB.APP\Refs
