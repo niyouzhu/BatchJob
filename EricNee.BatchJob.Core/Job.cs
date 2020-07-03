@@ -23,6 +23,8 @@ namespace EricNee.BatchJob.Core
             if (assembly == null)
                 assembly = Assembly.Load(jobDetail.AssemblyName);
             var type = assembly.GetType(jobDetail.JobFullName, true, true);
+            if (args == null || args.Length == 0)
+                return (IBatchJob)Activator.CreateInstance(type);
             return (IBatchJob)Activator.CreateInstance(type, args);
         }
 

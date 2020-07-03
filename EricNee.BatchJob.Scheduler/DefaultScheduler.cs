@@ -148,7 +148,9 @@ namespace EricNee.BatchJob.Scheduler
                     }
 
                 }
-                Waitor.SpinOnce();
+
+                //Waitor.SpinOnce();
+                Thread.Sleep(1);
             }
         }
 
@@ -182,8 +184,8 @@ namespace EricNee.BatchJob.Scheduler
                         Trace.WriteLine($"Time:{DateTime.Now};{ex}");
                     }
                 }
-                if (Waitor.NextSpinWillYield)
-                    Waitor.SpinOnce();
+                //Waitor.SpinOnce();
+                Thread.Sleep(1);
             }
 
 

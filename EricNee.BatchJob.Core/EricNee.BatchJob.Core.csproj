@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BatchJobBase.cs" />
     <Compile Include="BatchJobManager.cs" />
     <Compile Include="DefaultJobSerializer.cs" />
     <Compile Include="IBatchJob.cs" />
