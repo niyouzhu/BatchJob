@@ -8,7 +8,7 @@ namespace EricNee.BatchJob.Core
 {
     public class SchedulerConfigurationSection : System.Configuration.ConfigurationSection
     {
-        [ConfigurationProperty("ExecutorPath")]
-        public string ExecutorPath { get { return (string)this["ExecutorPath"]; } set { this["ExecutorPath"] = value; } }
+        [ConfigurationProperty("executorPath")]
+        public string ExecutorPath { get { return (string)this["executorPath"]; } set { this["executorPath"] = value; } }
     }
 }

@@ -10,7 +10,7 @@ namespace EricNee.BatchJob.Core
     {
         public static IEnumerable<Job> GetJobs()
         {
-            var jobs = ((JobConfigurationSection)ConfigurationManager.GetSection("BatchJob")).Jobs;
+            var jobs = ((JobConfigurationSection)ConfigurationManager.GetSection("batchJob")).Jobs;
             var rt = new List<Job>(jobs.Count);
             foreach (var job in jobs)
             {
@@ -21,7 +21,7 @@ namespace EricNee.BatchJob.Core
             return rt;
         }
 
-        [ConfigurationProperty("Jobs")]
-        public JobsData Jobs { get { return (JobsData)this["Jobs"]; } set { this["Jobs"] = value; } }
+        [ConfigurationProperty("jobs")]
+        public JobsData Jobs { get { return (JobsData)this["jobs"]; } set { this["jobs"] = value; } }
     }
 }

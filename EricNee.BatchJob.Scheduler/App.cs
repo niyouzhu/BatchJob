@@ -11,7 +11,7 @@ namespace EricNee.BatchJob.Scheduler
 {
     public class App
     {
-        public SchedulerConfigurationSection Section = (SchedulerConfigurationSection)ConfigurationManager.GetSection("Scheduler");
+        public SchedulerConfigurationSection Section = (SchedulerConfigurationSection)ConfigurationManager.GetSection("scheduler");
 
         private IScheduler _scheduler;
         public IScheduler Scheduler

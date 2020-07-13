@@ -8,16 +8,16 @@ namespace EricNee.BatchJob.Core
 {
     public class JobItemData : ConfigurationElement
     {
-        [ConfigurationProperty("JobId")]
-        public string JobId { get { return (string)this["JobId"]; } set { this["JobId"] = value; } }
-        [ConfigurationProperty("JobName")]
-        public string JobName { get { return (string)this["JobName"]; } set { this["JobName"] = value; } }
-        [ConfigurationProperty("TypeFullName")]
-        public string JobTypeFullName { get { return (string)this["TypeFullName"]; } set { this["TypeFullName"] = value; } }
-        [ConfigurationProperty("AssemblyName")]
-        public string JobAssemblyName { get { return (string)this["AssemblyName"]; } set { this["AssemblyName"] = value; } }
-        [ConfigurationProperty("Cron")]
-        public string Cron { get { return (string)this["Cron"]; } set { this["Cron"] = value; } }
+        [ConfigurationProperty("jobId")]
+        public string JobId { get { return (string)base["jobId"]; } set { base["jobId"] = value; } }
+        [ConfigurationProperty("jobName")]
+        public string JobName { get { return (string)base["jobName"]; } set { base["jobName"] = value; } }
+        [ConfigurationProperty("typeFullName")]
+        public string JobTypeFullName { get { return (string)base["typeFullName"]; } set { base["typeFullName"] = value; } }
+        [ConfigurationProperty("assemblyName")]
+        public string JobAssemblyName { get { return (string)base["assemblyName"]; } set { base["assemblyName"] = value; } }
+        [ConfigurationProperty("cron")]
+        public string Cron { get { return (string)base["cron"]; } set { base["cron"] = value; } }
     }
 
     public class JobsData : ConfigurationElementCollection
