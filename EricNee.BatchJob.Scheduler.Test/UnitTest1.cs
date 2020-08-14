@@ -24,7 +24,7 @@ namespace EricNee.BatchJob.Scheduler.Test
                 {
                     throw new Exception("Foo");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }
@@ -41,7 +41,7 @@ namespace EricNee.BatchJob.Scheduler.Test
                 {
                     throw new Exception("Bar");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }
