@@ -29,7 +29,7 @@ namespace EricNee.BatchJob.Executor
             }
             catch (Exception ex)
             {
-                Trace.WriteLine($"Time:{DateTime.Now};{ex}");
+                Trace.WriteLine($"Time:{DateTime.Now}; {ex}");
             }
 
         }
